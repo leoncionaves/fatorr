@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09-Dez-2019 às 12:33
+-- Tempo de geração: 10-Dez-2019 às 17:03
 -- Versão do servidor: 10.4.8-MariaDB
 -- versão do PHP: 7.3.11
 
@@ -48,9 +48,18 @@ CREATE TABLE `tb_empresa` (
   `idEnquadramento` int(11) NOT NULL,
   `razaoSocial` varchar(45) NOT NULL,
   `fantasia` varchar(45) NOT NULL,
+  `cnpj` varchar(14) NOT NULL,
+  `cnae` varchar(9) NOT NULL,
   `ativo` tinyint(4) NOT NULL DEFAULT 1,
   `dtInicioAtividade` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_empresa`
+--
+
+INSERT INTO `tb_empresa` (`idEmpresa`, `idEnquadramento`, `razaoSocial`, `fantasia`, `cnpj`, `cnae`, `ativo`, `dtInicioAtividade`) VALUES
+(1, 2, 'RAZÃO SOCIAL', 'NOME FANTASIA', '99999999000191', '12345678', 1, '2018-01-01');
 
 -- --------------------------------------------------------
 
@@ -65,6 +74,15 @@ CREATE TABLE `tb_enquadramento` (
   `vlrFimFaturamento` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `tb_enquadramento`
+--
+
+INSERT INTO `tb_enquadramento` (`idEnquadramento`, `nome`, `vlrIniFaturamento`, `vlrFimFaturamento`) VALUES
+(1, 'MEI', 0, 81000),
+(2, 'Micro Empresa - ME', 0, 360000),
+(3, 'Empresa de Pequeno Porte - EPP', 360000.01, 4800000);
+
 -- --------------------------------------------------------
 
 --
@@ -78,8 +96,7 @@ CREATE TABLE `tb_faturamento` (
   `dtEmissao` date NOT NULL,
   `serie` int(11) NOT NULL,
   `vlrButo` double NOT NULL,
-  `cancelada` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0: False\n1: True',
-  `tb_faturamentocol` varchar(45) DEFAULT NULL
+  `cancelada` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0: False\n1: True'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -157,6 +174,7 @@ ALTER TABLE `tb_apuracaofator`
 --
 ALTER TABLE `tb_empresa`
   ADD PRIMARY KEY (`idEmpresa`),
+  ADD UNIQUE KEY `cnpj_UNIQUE` (`cnpj`),
   ADD KEY `fk_tb_empresa_tb_enquadramento1_idx` (`idEnquadramento`);
 
 --
@@ -217,13 +235,13 @@ ALTER TABLE `tb_apuracaofator`
 -- AUTO_INCREMENT de tabela `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tb_enquadramento`
 --
 ALTER TABLE `tb_enquadramento`
-  MODIFY `idEnquadramento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEnquadramento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tb_faturamento`

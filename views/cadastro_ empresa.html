@@ -8,12 +8,12 @@
     <div class="container-fluid">
         <h3>Cadastro de Empresa</h3>
         <hr>
-        <form action="" method="POST">
+        <form action="./inserir" method="POST">
             <div class="row my-3">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <label class=" my-0">Razão Social</label>
-                    <input class=" form-control form-control-sm" type="text" name="razao" id="razao" require>
+                    <input placeholder="Razão Social" class=" form-control form-control-sm" type="text" name="razao" id="razao" require>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -27,9 +27,27 @@
             </div>
             <div class="row my-3">
                 <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <label class=" my-0">CNPJ</label>
+                    <input class=" form-control form-control-sm" type="text" name="cnpj" id="cnpj" require>
+                </div>
+                <div class="col-md-3">
+                    <label class=" my-0">CNAE</label>
+                    <input class=" form-control form-control-sm" type="text" name="cnae" id="cnae" require>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row my-3">
+                <div class="col-md-3"></div>
                 <div class="col-md-4">
                     <label class=" my-0">Enquadramento</label>
-                    <input class=" form-control form-control-sm" type="text" name="enquadramento" id="enquadramento" require>
+                    <!--<input class=" form-control form-control-sm" type="text" name="enquadramento" id="enquadramento" require>-->
+                    <select class=" form-control form-control-sm" name="enquadramento" id="enquadramento">
+                <option disabled selected>Selecione uma opção</option>
+                <option value="1">MEI</option>
+                <option value="2">Micro Empresa - ME</option>
+                <option value="3">Empresa de Pequeno Porte - EPP</option>
+            </select>
                 </div>
                 <div class="col-md-1 input-group-tex my-4">
                     <input type="checkbox" checked name="ativo" id="ativo" value="1"> Ativo
@@ -40,7 +58,7 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-2">
                     <label class=" my-0">Data Início Atividades</label>
-                    <input class=" form-control form-control-sm" type='date' name="inicioAtividade" id="inicioAtividade">
+                    <input class=" form-control form-control-sm" type='date' name="inicioAtividades" id="inicioAtividade">
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -50,7 +68,7 @@
                     <button class="submit  btn btn-outline-success btn-block">Salvar</button>
                 </div>
                 <div class="col-md-2">
-                    <a href="./home" class="cancel btn btn-outline-danger btn-block">Cancelar</a>
+                    <a href="../home" class="cancel btn btn-outline-danger btn-block">Cancelar</a>
                 </div>
                 <div class="col-md-4"></div>
             </div>
