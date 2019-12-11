@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Dez-2019 às 17:03
+-- Tempo de geração: 11-Dez-2019 às 17:38
 -- Versão do servidor: 10.4.8-MariaDB
 -- versão do PHP: 7.3.11
 
@@ -59,7 +59,7 @@ CREATE TABLE `tb_empresa` (
 --
 
 INSERT INTO `tb_empresa` (`idEmpresa`, `idEnquadramento`, `razaoSocial`, `fantasia`, `cnpj`, `cnae`, `ativo`, `dtInicioAtividade`) VALUES
-(1, 2, 'RAZÃO SOCIAL', 'NOME FANTASIA', '99999999000191', '12345678', 1, '2018-01-01');
+(1, 2, 'RAZÃO SOCIAL', 'NOME FANTASIA', '99999999000191', '1234567', 1, '2018-01-01');
 
 -- --------------------------------------------------------
 
@@ -92,12 +92,19 @@ INSERT INTO `tb_enquadramento` (`idEnquadramento`, `nome`, `vlrIniFaturamento`, 
 CREATE TABLE `tb_faturamento` (
   `idfaturamento` int(11) NOT NULL,
   `idEmpresa` int(11) NOT NULL,
-  `nrNota` int(11) NOT NULL,
+  `numNota` int(11) NOT NULL,
   `dtEmissao` date NOT NULL,
   `serie` int(11) NOT NULL,
-  `vlrButo` double NOT NULL,
+  `vlrBruto` double NOT NULL,
   `cancelada` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0: False\n1: True'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_faturamento`
+--
+
+INSERT INTO `tb_faturamento` (`idfaturamento`, `idEmpresa`, `numNota`, `dtEmissao`, `serie`, `vlrBruto`, `cancelada`) VALUES
+(1, 1, 123, '2019-12-11', 1, 15000, 0);
 
 -- --------------------------------------------------------
 
@@ -111,6 +118,13 @@ CREATE TABLE `tb_folha` (
   `dtCompetencia` date NOT NULL,
   `vlrContribuicaoINSS` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_folha`
+--
+
+INSERT INTO `tb_folha` (`idfolha`, `idEmpresa`, `dtCompetencia`, `vlrContribuicaoINSS`) VALUES
+(1, 1, '2019-12-11', 2500);
 
 -- --------------------------------------------------------
 
@@ -247,13 +261,13 @@ ALTER TABLE `tb_enquadramento`
 -- AUTO_INCREMENT de tabela `tb_faturamento`
 --
 ALTER TABLE `tb_faturamento`
-  MODIFY `idfaturamento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idfaturamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tb_folha`
 --
 ALTER TABLE `tb_folha`
-  MODIFY `idfolha` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idfolha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tb_funcoes`
