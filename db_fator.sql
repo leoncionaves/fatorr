@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Dez-2019 às 17:38
+-- Tempo de geração: 12-Dez-2019 às 20:52
 -- Versão do servidor: 10.4.8-MariaDB
 -- versão do PHP: 7.3.11
 
@@ -99,13 +99,6 @@ CREATE TABLE `tb_faturamento` (
   `cancelada` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0: False\n1: True'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Extraindo dados da tabela `tb_faturamento`
---
-
-INSERT INTO `tb_faturamento` (`idfaturamento`, `idEmpresa`, `numNota`, `dtEmissao`, `serie`, `vlrBruto`, `cancelada`) VALUES
-(1, 1, 123, '2019-12-11', 1, 15000, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -118,13 +111,6 @@ CREATE TABLE `tb_folha` (
   `dtCompetencia` date NOT NULL,
   `vlrContribuicaoINSS` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `tb_folha`
---
-
-INSERT INTO `tb_folha` (`idfolha`, `idEmpresa`, `dtCompetencia`, `vlrContribuicaoINSS`) VALUES
-(1, 1, '2019-12-11', 2500);
 
 -- --------------------------------------------------------
 
@@ -154,12 +140,31 @@ CREATE TABLE `tb_permissao` (
 
 CREATE TABLE `tb_tributacao` (
   `idTributacao` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
-  `percImposto` float NOT NULL,
-  `vlrDeduzir` double NOT NULL,
+  `anexo` varchar(2) NOT NULL,
+  `faixa` int(11) NOT NULL,
   `vlrMinReceita` double NOT NULL,
-  `vlrMaxReceita` double NOT NULL
+  `vlrMaxReceita` double NOT NULL,
+  `aliquota` float NOT NULL,
+  `vlrDeduzir` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_tributacao`
+--
+
+INSERT INTO `tb_tributacao` (`idTributacao`, `anexo`, `faixa`, `vlrMinReceita`, `vlrMaxReceita`, `aliquota`, `vlrDeduzir`) VALUES
+(1, '3', 1, 0, 180000, 6, 0),
+(2, '3', 2, 180000.01, 360000, 11.2, 9360),
+(3, '3', 3, 360000.01, 720000, 13.5, 17640),
+(4, '3', 4, 720000.01, 1800000, 16, 35640),
+(5, '3', 5, 1800000.01, 3600000, 21, 125640),
+(6, '3', 6, 3600000.01, 4800000, 33, 648000),
+(7, '5', 1, 0, 180000, 15.5, 0),
+(8, '5', 2, 180000.01, 360000, 18, 4500),
+(9, '5', 3, 360000.01, 720000, 19.5, 9900),
+(10, '5', 4, 720000.01, 1800000, 20.5, 17100),
+(11, '5', 5, 1800000.01, 3600000, 23, 62100),
+(12, '5', 6, 3600000.01, 4800000, 30.5, 540000);
 
 -- --------------------------------------------------------
 
@@ -261,13 +266,13 @@ ALTER TABLE `tb_enquadramento`
 -- AUTO_INCREMENT de tabela `tb_faturamento`
 --
 ALTER TABLE `tb_faturamento`
-  MODIFY `idfaturamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idfaturamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `tb_folha`
 --
 ALTER TABLE `tb_folha`
-  MODIFY `idfolha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idfolha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `tb_funcoes`
@@ -285,7 +290,7 @@ ALTER TABLE `tb_permissao`
 -- AUTO_INCREMENT de tabela `tb_tributacao`
 --
 ALTER TABLE `tb_tributacao`
-  MODIFY `idTributacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTributacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restrições para despejos de tabelas
