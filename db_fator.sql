@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Dez-2019 às 20:52
+-- Tempo de geração: 10-Jan-2020 às 18:49
 -- Versão do servidor: 10.4.8-MariaDB
 -- versão do PHP: 7.3.11
 
@@ -54,13 +54,6 @@ CREATE TABLE `tb_empresa` (
   `dtInicioAtividade` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Extraindo dados da tabela `tb_empresa`
---
-
-INSERT INTO `tb_empresa` (`idEmpresa`, `idEnquadramento`, `razaoSocial`, `fantasia`, `cnpj`, `cnae`, `ativo`, `dtInicioAtividade`) VALUES
-(1, 2, 'RAZÃO SOCIAL', 'NOME FANTASIA', '99999999000191', '1234567', 1, '2018-01-01');
-
 -- --------------------------------------------------------
 
 --
@@ -73,15 +66,6 @@ CREATE TABLE `tb_enquadramento` (
   `vlrIniFaturamento` double NOT NULL,
   `vlrFimFaturamento` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `tb_enquadramento`
---
-
-INSERT INTO `tb_enquadramento` (`idEnquadramento`, `nome`, `vlrIniFaturamento`, `vlrFimFaturamento`) VALUES
-(1, 'MEI', 0, 81000),
-(2, 'Micro Empresa - ME', 0, 360000),
-(3, 'Empresa de Pequeno Porte - EPP', 360000.01, 4800000);
 
 -- --------------------------------------------------------
 
@@ -148,24 +132,6 @@ CREATE TABLE `tb_tributacao` (
   `vlrDeduzir` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Extraindo dados da tabela `tb_tributacao`
---
-
-INSERT INTO `tb_tributacao` (`idTributacao`, `anexo`, `faixa`, `vlrMinReceita`, `vlrMaxReceita`, `aliquota`, `vlrDeduzir`) VALUES
-(1, '3', 1, 0, 180000, 6, 0),
-(2, '3', 2, 180000.01, 360000, 11.2, 9360),
-(3, '3', 3, 360000.01, 720000, 13.5, 17640),
-(4, '3', 4, 720000.01, 1800000, 16, 35640),
-(5, '3', 5, 1800000.01, 3600000, 21, 125640),
-(6, '3', 6, 3600000.01, 4800000, 33, 648000),
-(7, '5', 1, 0, 180000, 15.5, 0),
-(8, '5', 2, 180000.01, 360000, 18, 4500),
-(9, '5', 3, 360000.01, 720000, 19.5, 9900),
-(10, '5', 4, 720000.01, 1800000, 20.5, 17100),
-(11, '5', 5, 1800000.01, 3600000, 23, 62100),
-(12, '5', 6, 3600000.01, 4800000, 30.5, 540000);
-
 -- --------------------------------------------------------
 
 --
@@ -173,7 +139,9 @@ INSERT INTO `tb_tributacao` (`idTributacao`, `anexo`, `faixa`, `vlrMinReceita`, 
 --
 
 CREATE TABLE `tb_usuario` (
-  `id_usuario` int(11) NOT NULL
+  `idusuario` int(11) NOT NULL,
+  `login` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -238,7 +206,7 @@ ALTER TABLE `tb_tributacao`
 -- Índices para tabela `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`idusuario`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -254,25 +222,25 @@ ALTER TABLE `tb_apuracaofator`
 -- AUTO_INCREMENT de tabela `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tb_enquadramento`
 --
 ALTER TABLE `tb_enquadramento`
-  MODIFY `idEnquadramento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idEnquadramento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tb_faturamento`
 --
 ALTER TABLE `tb_faturamento`
-  MODIFY `idfaturamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idfaturamento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tb_folha`
 --
 ALTER TABLE `tb_folha`
-  MODIFY `idfolha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idfolha` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tb_funcoes`
@@ -290,7 +258,13 @@ ALTER TABLE `tb_permissao`
 -- AUTO_INCREMENT de tabela `tb_tributacao`
 --
 ALTER TABLE `tb_tributacao`
-  MODIFY `idTributacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idTributacao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_usuario`
+--
+ALTER TABLE `tb_usuario`
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
